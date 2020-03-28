@@ -29,6 +29,14 @@ function CoreCamera({
   useEffect(() => {
     (async () => {
       if (Platform.OS === 'web') {
+        let types = null;
+        try {
+          types = await Camera.getAvailableCameraTypesAsync();
+          alert(JSON.stringify({ types }));
+        } catch (error) {
+          alert(JSON.stringify({ types, error }));
+        }
+
         const constraints = {
           audio: false,
           video: { width: window.innerWidth, height: window.innerHeight },
